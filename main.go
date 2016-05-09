@@ -62,11 +62,11 @@ func setupLogging(logfile string) *lumberjack.Logger {
 func loadConfig(filenameWithAbsPath string) *Config {
 	file, err := ioutil.ReadFile(filenameWithAbsPath)
 	if err != nil {
-		panic("ERROR: Failed to load config file. Error is " + err.Error())
+		panic("ERROR: Failed to load config file. Error is:" + err.Error())
 	}
 	config := &GlobalConfig
 	if err = json.Unmarshal(file, config); err != nil {
-		panic("ERROR: Failed to load config.json. Error is " + err.Error())
+		panic("ERROR: Failed to load config.json. Error is:" + err.Error())
 	}
 	fmt.Printf("Config file read is: %s\n", config)
 	return config

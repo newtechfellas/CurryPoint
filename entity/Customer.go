@@ -45,7 +45,7 @@ func (c *Customer) Exists() bool {
 	sql := "select count(*) from Customer where Email =?"
 	count, err := DBMAP.SelectInt(sql, c.Email)
 	if err != nil {
-		LogError("Failed to user existence using " + c.PhoneNumber + ". Error is " + err.Error())
+		LogError("Failed to check Customer Exists using Email " + c.Email + ". Error is " + err.Error())
 	}
 	if count == 0 {
 		return false
@@ -56,8 +56,5 @@ func (c *Customer) Exists() bool {
 
 func (c *Customer) ConfigureDBMap(dbMap *gorp.DbMap) {
 	tbl := dbMap.AddTableWithName(*c, "Customer").SetKeys(false, "Email")
-	mandatoryCols := []string{"Password"}
-	for _, col := range mandatoryCols {
-		tbl.ColMap(col).SetNotNull(true)
-	}
+	tbl.ColMap("Password").SetNotNull(true)
 }

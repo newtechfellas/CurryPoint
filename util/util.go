@@ -19,6 +19,10 @@ func IsMobileReq(r *http.Request) bool {
 	return false
 }
 
+func IsTrustedAjaxRequest(r *http.Request) bool {
+	return false
+}
+
 func JsonResponse(w http.ResponseWriter, v interface{}, headers map[string]string, statusCode int) {
 	w.Header().Set("Content-Type", "application/json")
 	//Any custom headers passed in

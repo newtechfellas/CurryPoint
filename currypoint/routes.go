@@ -16,7 +16,6 @@ type Route struct {
 type Routes []Route
 
 func NewRouter() *mux.Router {
-
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		router.
@@ -35,5 +34,35 @@ var routes = Routes{
 		"GET",
 		"/",
 		handlerfuncs.Home,
+	},
+	Route{
+		"login",
+		"POST",
+		"/login",
+		handlerfuncs.Login,
+	},
+	Route{
+		"NewUser",
+		"POST",
+		"/NewUser",
+		handlerfuncs.NewUser,
+	},
+	Route{
+		"UpdateUser",
+		"POST",
+		"/UpdateUser",
+		handlerfuncs.UpdateUser,
+	},
+	Route{
+		"PlaceOrder",
+		"POST",
+		"/order",
+		handlerfuncs.PlaceOrder,
+	},
+	Route{
+		"FetchOrder",
+		"GET",
+		"/order/{id}",
+		handlerfuncs.GetOrder,
 	},
 }
