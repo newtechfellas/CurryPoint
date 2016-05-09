@@ -1,11 +1,10 @@
-package CurryPoint
+package entity
 
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"gopkg.in/gorp.v1"
 	"log"
-	"github.com/newtechfellas/CurryPoint/entity"
 )
 
 var DBMAP *gorp.DbMap = nil
@@ -24,7 +23,7 @@ func PrepareDBMap(connectionStr string) *gorp.DbMap {
 	DBMAP = &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
 
 	// add a table, setting the table name to 'posts' and
-	(&entity.Customer{}).ConfigureDBMap(DBMAP)
+	(&Customer{}).ConfigureDBMap(DBMAP)
 
 	// create the table. in a production system you'd generally
 	// use a migration tool, or create the tables via scripts

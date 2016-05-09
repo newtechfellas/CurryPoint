@@ -6,7 +6,6 @@ import (
 	"errors"
 	"strings"
 	. "github.com/newtechfellas/CurryPoint/util"
-	"github.com/newtechfellas/CurryPoint"
 )
 
 type Customer struct {
@@ -44,7 +43,7 @@ func (c *Customer) PreInsert(s gorp.SqlExecutor) error {
 
 func (c *Customer) Exists() bool {
 	sql := "select count(*) from Customer where Email =?"
-	count, err := CurryPoint.DBMAP.SelectInt(sql, c.Email)
+	count, err := DBMAP.SelectInt(sql, c.Email)
 	if err != nil {
 		LogError("Failed to user existence using " + c.PhoneNumber + ". Error is " + err.Error())
 	}
@@ -58,7 +57,7 @@ func (c *Customer) Exists() bool {
 func (c *Customer) ConfigureDBMap(dbMap *gorp.DbMap) {
 	tbl := dbMap.AddTableWithName(*c, "Customer").SetKeys(false, "Email")
 	mandatoryCols := []string{"Password"}
-	for _, col := range mandatoryCols() {
+	for _, col := range mandatoryCols {
 		tbl.ColMap(col).SetNotNull(true)
 	}
 }
